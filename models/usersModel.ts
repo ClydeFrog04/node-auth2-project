@@ -6,40 +6,27 @@ interface IUser{
     department: string;
 }
 
-async function add(user) {
+
+export async function findById(id:number){
+    return usersDb("users")
+        .select("id", "username")
+        .where({id})
+        .first();
+}
+
+export async function add(user:IUser) {
     const [id] = await usersDb("users").insert(user);
+    return findById(id);
+}
+
+export function find() {
+    return usersDb("users").select("id", "username");
 
 }
 
-/*
-const db = require("../database/config")
+export function findBy(filter:any) {
+    return usersDb("users")
+        .select("id", "username", "password")
+        .where(filter);
 
-async function add(user) {
-	const [id] = await db("users").insert(user)
-	return findById(id)
 }
-
-function find() {
-	return db("users").select("id", "username")
-}
-
-function findBy(filter) {
-	return db("users")
-		.select("id", "username", "password")
-		.where(filter)
-}
-
-function findById(id) {
-	return db("users")
-		.select("id", "username")
-		.where({ id })
-		.first()
-}
-
-module.exports = {
-	add,
-	find,
-	findBy,
-	findById,
-}
- */
