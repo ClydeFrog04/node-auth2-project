@@ -60,22 +60,4 @@ usersRouter.get("/users", restrict, async (req, res) => {
         console.log(e.stack);
         res.status(500).json({error: "Error getting users"});
     }
-
-    /*
-    router.get("/users", restrict("admin"), async (req, res, next) => {
-	try {
-		res.json(await Users.find())
-	} catch(err) {
-		next(err)
-	}
-})
-     */
 });
-
-/*
-
-
-GET	/api/users	If the user is logged in, respond with an array of all the users contained in the database. If the user is not logged in respond with the
-correct status code and the message: 'You shall not pass!'.
-
- */
